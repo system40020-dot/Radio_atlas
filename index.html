@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiography Atlas</title>
+<meta name="description" content="Radiography study atlas — positioning, anatomy, and common fractures by body region.">
+<meta name="theme-color" content="#101a2e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23101a2e'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle'%3E%F0%9F%A6%B4%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23101a2e'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle'%3E%F0%9F%A6%B4%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Radiography%20Study%20Atlas%22%2C%22short_name%22%3A%22Radio%20Atlas%22%2C%22description%22%3A%22Radiography%20study%20atlas%20%E2%80%94%20routine%20and%20special%20X-ray%20positioning%2C%20anatomy%2C%20cross-sectional%20anatomy%2C%20and%20common%20fractures%20by%20body%20region.%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230b1424%22%2C%22theme_color%22%3A%22%23101a2e%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520100%2520100%27%253E%253Crect%2520width%3D%27100%27%2520height%3D%27100%27%2520rx%3D%2720%27%2520fill%3D%27%2523101a2e%27%2F%253E%253Ctext%2520x%3D%2750%27%2520y%3D%2768%27%2520font-size%3D%2755%27%2520text-anchor%3D%27middle%27%253E%25F0%259F%25A6%25B4%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --viewbox-bg: #101a2e;
+    --viewbox-bg-deep: #0b1424;
+    --panel: #16223b;
+    --panel-line: #2a3a5c;
+    --glow: #8fd6e8;
+    --glow-dim: #5c8fa3;
+    --bone: #f2ede1;
+    --bone-dim: #c9c2b2;
+    --amber: #e0a458;
+    --text-main: #e9edf3;
+    --text-soft: #a9b4c8;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Work Sans', -apple-system, Helvetica, Arial, sans-serif;
+  }
+  :root:not([data-theme="light"]) { color-scheme: dark; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --viewbox-bg: #eef1f6; --viewbox-bg-deep: #e3e7ee; --panel: #ffffff;
+      --panel-line: #d7dce6; --text-main: #1a2233; --text-soft: #57627a; --bone: #1a2233;
+    }
+  }
+  :root[data-theme="light"] {
+    --viewbox-bg: #eef1f6; --viewbox-bg-deep: #e3e7ee; --panel: #ffffff;
+    --panel-line: #d7dce6; --text-main: #1a2233; --text-soft: #57627a; --bone: #1a2233;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background: var(--viewbox-bg-deep); color: var(--text-main); font-family: var(--sans); line-height:1.5; }
+  .app{ max-width: 1120px; margin: 0 auto; padding: 0 20px 80px; }
+  header.hero{
+    background: linear-gradient(180deg, var(--viewbox-bg) 0%, var(--viewbox-bg-deep) 100%);
+    border-bottom: 1px solid var(--panel-line);
+    padding: 40px 20px 28px; margin: 0 -20px 32px;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .hero-inner{ max-width: 1120px; margin: 0 auto; }
+  .eyebrow{ font-size: 13px; color: var(--glow); letter-spacing: 0.02em; margin: 0 0 6px; }
+  h1{ font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 4.5vw, 36px); margin: 0 0 10px; color: var(--bone); }
+  .hero p.sub{ color: var(--text-soft); max-width: 560px; margin: 0 0 22px; font-size: 15px; }
+  .search-row{ display:flex; gap: 10px; flex-wrap: wrap; }
+  #searchInput{
+    flex: 1 1 280px; background: var(--panel); border: 1px solid var(--panel-line);
+    border-radius: 8px; padding: 13px 16px; color: var(--text-main); font-size: 15px; font-family: var(--sans);
+  }
+  #searchInput:focus{ outline: 2px solid var(--glow); outline-offset: 1px; }
+  #searchInput::placeholder{ color: var(--text-soft); }
+  #searchResults{ margin-top: 12px; }
+  .search-hit{
+    display:block; width:100%; text-align:left; background: var(--panel); border: 1px solid var(--panel-line);
+    border-radius: 8px; padding: 10px 14px; color: var(--text-main); font-family: var(--sans);
+    font-size: 14.5px; margin-bottom: 8px; cursor: pointer;
+  }
+  .search-hit:hover{ border-color: var(--glow-dim); }
+  .search-hit .hit-region{ color: var(--text-soft); font-size: 12.5px; }
+
+  .picker-groups{ margin-top: 16px; display:none; }
+  .picker-groups.open{ display:block; }
+  .picker-group{ margin-bottom: 12px; }
+  .picker-group-label{ font-size: 11.5px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .region-picker{ display:flex; gap:8px; flex-wrap: wrap; }
+  .region-chip{
+    background: transparent; border: 1px solid var(--panel-line); color: var(--text-soft);
+    padding: 6px 13px; border-radius: 999px; font-size: 13.5px; font-family: var(--sans); cursor:pointer;
+  }
+  .region-chip[aria-pressed="true"]{ border-color: var(--glow); color: var(--bone); background: rgba(143,214,232,0.08); }
+  .region-chip:focus-visible{ outline: 2px solid var(--glow); outline-offset:2px; }
+  .toggle-browse{
+    margin-top: 14px; background: none; border: none; color: var(--glow); font-size: 13px;
+    font-family: var(--sans); cursor: pointer; padding: 0;
+  }
+
+  main#region-view{ display:none; }
+  main#region-view.active{ display:block; }
+  .region-title{ display:flex; align-items: baseline; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+  .region-title h2{ font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; color: var(--bone); }
+  .region-title .region-tag{ color: var(--glow); font-size: 13px; }
+
+  section.block{ margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--panel-line); }
+  section.block h3{ font-family: var(--serif); font-size: 18px; font-weight: 500; margin: 0 0 14px; color: var(--bone); }
+  .view-card{ background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px; padding: 15px 18px; margin-bottom: 10px; }
+  .view-card .name{ font-weight: 600; font-size: 14.5px; margin-bottom: 6px; color: var(--bone); }
+  .view-card .field{ font-size: 13.5px; color: var(--text-soft); margin-top: 4px; }
+  .view-card .field b{ color: var(--text-main); font-weight: 600; }
+
+  .anatomy-text{ font-size: 15px; color: var(--text-main); max-width: 68ch; }
+  .anatomy-label{ display:block; font-size: 12.5px; color: var(--glow); margin-bottom: 4px; }
+
+  .fracture-card{
+    background: var(--panel); border: 1px solid var(--panel-line); border-left: 3px solid var(--amber);
+    border-radius: 8px; padding: 15px 18px; margin-bottom: 12px; scroll-margin-top: 140px;
+  }
+  .fracture-card.flash{ border-left-color: var(--glow); background: rgba(143,214,232,0.06); }
+  .fracture-card .fname{ font-family: var(--serif); font-size: 17px; color: var(--bone); margin: 0 0 8px; }
+  .fracture-card .field{ font-size: 13.5px; color: var(--text-soft); margin-top: 5px; }
+  .fracture-card .field b{ color: var(--text-main); font-weight: 600; }
+  .fracture-card .note{ margin-top: 10px; font-size: 13.5px; color: var(--bone-dim); font-style: italic; }
+
+  .img-refs{ margin-top: 8px; display:flex; gap:8px; flex-wrap: wrap; }
+  .img-refs a{
+    font-size: 12.5px; color: var(--glow); text-decoration: none; border: 1px solid var(--panel-line);
+    padding: 5px 10px; border-radius: 999px;
+  }
+  .img-refs a:hover{ border-color: var(--glow); }
+  .empty-note{ color: var(--text-soft); font-size: 14px; padding: 10px 0; }
+
+  @media (max-width: 560px){
+    header.hero{ padding: 26px 16px 18px; position: static; }
+    .app{ padding: 0 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Radiography Study Atlas</p>
+      <h1>Positions, anatomy, fractures.</h1>
+      <p class="sub">Search a fracture or region, or browse the full skeleton by group.</p>
+      <div class="search-row">
+        <input id="searchInput" type="text" placeholder="Search a fracture (e.g. Colles) or a region (e.g. Foot)…" autocomplete="off">
+      </div>
+      <div id="searchResults"></div>
+      <button class="toggle-browse" id="browseToggle">Browse all regions ↓</button>
+      <div class="picker-groups" id="pickerGroups"></div>
+    </div>
+  </header>
+  <main id="region-view"></main>
+</div>
+
+<script>
+const DATA = [
+  {
+    id: "hand", name: "Hand", region: "Upper Limb",
+    routineViews: [
+      { name: "PA Hand", positioning: "Hand pronated flat on IR, fingers slightly separated, CR perpendicular to 3rd MCP joint", purpose: "Metacarpals, phalanges, interphalangeal joints" },
+      { name: "PA Oblique Hand (45°)", positioning: "Hand rotated 45° medially from PA, fingers supported/fanned", purpose: "Separates overlapping phalanges and metacarpal shafts" },
+      { name: "Lateral Hand (Fan Lateral)", positioning: "Hand true lateral, thumb anterior, fingers fanned/separated", purpose: "Anterior/posterior displacement, foreign bodies" }
+    ],
+    specialViews: [
+      { name: "Ball-Catcher's (Norgaard) View", positioning: "Both hands in AP oblique 45°, fingers extended as if catching a ball", purpose: "Early rheumatoid changes at MCP/ulnar styloid, bilateral comparison" },
+      { name: "Brewerton View", positioning: "Dorsal surface of fingers on IR, MCP joints flexed 65°, CR angled 15° toward ulna", purpose: "MCP head erosions, useful in RA workup" }
+    ],
+    anatomy: { normal: "19 bones distal to the wrist: 5 metacarpals and 14 phalanges (2 in thumb, 3 each in fingers). MCP, PIP, and DIP joints are the key articulations.", crossSectional: "Cross-sectional imaging of the hand is uncommon; when done (MRI), axial slices show flexor/extensor tendon compartments and collateral ligaments at MCP/IP joints." },
+    fractures: [
+      { name: "Boxer's Fracture", location: "Neck of 5th metacarpal", mechanism: "Direct axial blow with closed fist (punching)", findings: "Volar angulation of the metacarpal head", note: "Most common metacarpal fracture; named for the mechanism, not that boxers actually get it most (more common in unskilled punches)." },
+      { name: "Bennett's Fracture", location: "Base of 1st metacarpal, intra-articular", mechanism: "Axial force on partially flexed thumb", findings: "Small volar fragment stays with trapezium, shaft displaces proximally", note: "Unstable due to abductor pollicis longus pull on the shaft fragment." },
+      { name: "Rolando's Fracture", location: "Base of 1st metacarpal, intra-articular", mechanism: "Similar to Bennett's, higher energy", findings: "Comminuted, often Y- or T-shaped fracture pattern", note: "Worse prognosis than Bennett's due to comminution." }
+    ]
+  },
+  {
+    id: "wrist", name: "Wrist", region: "Upper Limb",
+    routineViews: [
+      { name: "PA Wrist", positioning: "Hand pronated, wrist flat on IR, CR perpendicular to midcarpal area", purpose: "Carpal bones, distal radius/ulna, joint spaces" },
+      { name: "Oblique Wrist (45° pronation)", positioning: "Wrist rotated 45° from PA, fingers slightly flexed", purpose: "Trapezium, scaphoid, reduces carpal overlap" },
+      { name: "Lateral Wrist", positioning: "Wrist true lateral, thumb up, CR perpendicular to radial styloid", purpose: "Alignment (radius–lunate–capitate axis), dorsal/volar displacement" }
+    ],
+    specialViews: [
+      { name: "Scaphoid Series (ulnar deviation PA)", positioning: "PA with wrist deviated toward ulna to elongate scaphoid, CR angled 10–15° proximally", purpose: "Unmasks scaphoid waist fractures often missed on routine PA" },
+      { name: "Carpal Tunnel (Gaynor–Hart)", positioning: "Wrist hyperextended, palm on IR, CR angled 25–30° to palm", purpose: "Hook of hamate, pisiform, carpal tunnel floor" }
+    ],
+    anatomy: { normal: "8 carpal bones in two rows — proximal: scaphoid, lunate, triquetrum, pisiform; distal: trapezium, trapezoid, capitate, hamate. Distal radius/ulna articulate proximally.", crossSectional: "Axial CT through carpal tunnel shows flexor tendons, median nerve, and hook of hamate/pisiform boundaries; useful for TFCC and carpal tunnel evaluation." },
+    fractures: [
+      { name: "Colles' Fracture", location: "Distal radius, dorsal angulation", mechanism: "FOOSH (fall on outstretched hand)", findings: "Dorsal displacement/angulation — classic 'dinner fork' deformity clinically", note: "Most common wrist fracture in older adults with osteoporosis." },
+      { name: "Smith's Fracture", location: "Distal radius, volar angulation", mechanism: "Fall onto flexed wrist", findings: "Volar (palmar) displacement — reverse of Colles'", note: "Also called 'reverse Colles' — less common." },
+      { name: "Scaphoid Fracture", location: "Waist of scaphoid (most common) vs proximal pole", mechanism: "FOOSH with wrist extended and radially deviated", findings: "Often subtle/occult on initial X-ray; may need scaphoid series or MRI if clinically suspected but X-ray negative", note: "High avascular necrosis risk for proximal pole fractures due to retrograde blood supply." }
+    ]
+  },
+  {
+    id: "forearm", name: "Forearm", region: "Upper Limb",
+    routineViews: [
+      { name: "AP Forearm", positioning: "Arm extended, epicondyles parallel to IR, includes wrist and elbow joints", purpose: "Full radius/ulna length, alignment, both joints for rotation reference" },
+      { name: "Lateral Forearm", positioning: "Elbow flexed 90°, humeral epicondyles superimposed, includes both joints", purpose: "AP/posterior displacement, confirms true lateral at elbow" }
+    ],
+    specialViews: [
+      { name: "Oblique Forearm", positioning: "Forearm rotated partway between AP and lateral", purpose: "Problem-solving view when fracture fragments are ambiguous on routine views" }
+    ],
+    anatomy: { normal: "Radius (lateral, thumb side) and ulna (medial) connected by the interosseous membrane; proximal and distal radioulnar joints allow forearm rotation (pronation/supination).", crossSectional: "Axial CT shows the radius-ulna relationship and interosseous space — important for assessing rotational alignment in both-bone fractures." },
+    fractures: [
+      { name: "Monteggia Fracture-Dislocation", location: "Proximal/mid ulna fracture with radial head dislocation", mechanism: "FOOSH with forced pronation, or direct blow to forearm", findings: "Ulna fracture plus radial head no longer aligned with capitellum on any view", note: "Easy to miss the radial head dislocation if only the ulna fracture is scrutinized — always trace a line through the radial shaft to the capitellum." },
+      { name: "Galeazzi Fracture-Dislocation", location: "Distal 1/3 radius fracture with distal radioulnar joint (DRUJ) disruption", mechanism: "FOOSH with forearm rotation", findings: "Radius fracture with widened or dislocated DRUJ on the lateral/AP", note: "'Fracture of necessity' — often needs surgical fixation to restore DRUJ stability." },
+      { name: "Both-Bone Forearm Fracture", location: "Radius and ulna shaft, same level or different levels", mechanism: "Direct trauma or FOOSH", findings: "Complete fractures of both bones; in children often incomplete (greenstick) fractures instead", note: "In pediatric patients, look for greenstick or torus (buckle) patterns rather than complete fractures." }
+    ]
+  },
+  {
+    id: "elbow", name: "Elbow", region: "Upper Limb",
+    routineViews: [
+      { name: "AP Elbow", positioning: "Arm fully extended, humeral epicondyles parallel to IR, CR perpendicular to elbow joint", purpose: "Distal humerus, radial head/neck, proximal ulna in profile" },
+      { name: "Lateral Elbow (90° flexion)", positioning: "Elbow flexed 90°, hand lateral (thumb up), humerus and forearm on same plane", purpose: "Fat pad sign evaluation — key indirect sign of occult fracture" },
+      { name: "AP Oblique (medial and lateral rotation)", positioning: "Forearm rotated medially or laterally ~45° from AP", purpose: "Medial: coronoid process profile. Lateral: radial head/neck profile" }
+    ],
+    specialViews: [
+      { name: "Radial Head/Coronoid (Coyle) View", positioning: "Elbow flexed 90°, CR angled 45° toward shoulder, further angled 45° for coronoid variant", purpose: "Radial head/neck or coronoid process when obscured on routine views" },
+      { name: "Axial (Jones) View for Olecranon", positioning: "Elbow maximally flexed, hand on shoulder, CR angled toward olecranon", purpose: "Olecranon process profile, less commonly used since CT is preferred for complex fractures" }
+    ],
+    anatomy: { normal: "Distal humerus (capitulum, trochlea, medial/lateral epicondyles, olecranon and coronoid fossae) articulates with proximal radius and ulna. Anterior and posterior fat pads sit in the fossae and displace with joint effusion.", crossSectional: "Axial CT shows the radiocapitellar and trochlear-ulnar joint relationships — used for surgical planning in complex intra-articular fractures." },
+    fractures: [
+      { name: "Supracondylar Fracture", location: "Distal humerus, just above the condyles", mechanism: "FOOSH with hyperextended elbow", findings: "Fracture line through the distal humeral metaphysis; posterior fat pad sign often the only clue if non-displaced", note: "Most common elbow fracture in children; carries risk to the brachial artery and median nerve — watch for Volkmann's ischemic contracture." },
+      { name: "Radial Head Fracture", location: "Radial head, often subtle", mechanism: "FOOSH with forearm pronated", findings: "Cortical step-off or lucent line at the radial head; posterior fat pad sign ('sail sign') may be the only finding", note: "Graded by the Mason classification (I: non-displaced, II: displaced, III: comminuted)." },
+      { name: "Olecranon Fracture", location: "Olecranon process of proximal ulna", mechanism: "Direct fall onto flexed elbow, or triceps avulsion", findings: "Fracture line through olecranon, often displaced by triceps pull", note: "Displacement depends on whether the triceps tendon insertion remains intact." }
+    ]
+  },
+  {
+    id: "humerus", name: "Humerus", region: "Upper Limb",
+    routineViews: [
+      { name: "AP Humerus", positioning: "Arm extended, epicondyles parallel to IR, includes shoulder and elbow joints if possible", purpose: "Full shaft length and alignment" },
+      { name: "Lateral Humerus (or Transthoracic Lateral)", positioning: "Arm rotated 90° from AP if mobile; transthoracic lateral through the thorax if patient cannot move the arm (e.g. acute fracture)", purpose: "AP/posterior displacement and angulation" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "Long bone with a surgical neck (common fracture site) proximally, deltoid tuberosity laterally, and the radial (spiral) groove along the posterior shaft carrying the radial nerve.", crossSectional: "Axial CT of the shaft is used mainly for pathologic fracture evaluation (looking for underlying lytic lesion) rather than routine trauma." },
+    fractures: [
+      { name: "Surgical Neck Fracture", location: "Surgical neck of the proximal humerus", mechanism: "Fall onto an outstretched or direct blow to the shoulder, common in osteoporotic falls", findings: "Fracture line just distal to the anatomic neck/tuberosities", note: "Most common proximal humerus fracture site in older adults." },
+      { name: "Midshaft Humeral Fracture", location: "Humeral shaft", mechanism: "Direct trauma or torsional force (e.g. arm-wrestling injury)", findings: "Transverse, oblique, or spiral fracture line depending on mechanism", note: "Radial nerve runs directly against the shaft in the spiral groove — watch for wrist drop from radial nerve injury." },
+      { name: "Proximal Humerus Fracture (Neer classification)", location: "Proximal humerus — head, greater tuberosity, lesser tuberosity, and/or shaft", mechanism: "FOOSH or direct fall onto the shoulder", findings: "Classified by number of displaced parts (1-4 part) among the four anatomic segments", note: "Neer classification guides whether surgery is needed based on displacement/angulation thresholds." }
+    ]
+  },
+  {
+    id: "shoulder", name: "Shoulder", region: "Upper Limb",
+    routineViews: [
+      { name: "AP Shoulder (internal/external rotation)", positioning: "Patient upright or supine, humerus rotated internally and externally for two AP projections", purpose: "Greater/lesser tuberosity profile (external) and humeral shaft profile (internal)" },
+      { name: "Scapular Y View", positioning: "Patient angled ~60° anterior oblique so the scapula is seen in profile forming a 'Y'", purpose: "Confirms anterior vs posterior humeral head dislocation" },
+      { name: "Axillary View", positioning: "Arm abducted, CR directed through the axilla superior-to-inferior or inferior-to-superior", purpose: "Best view of the glenohumeral joint and glenoid rim; confirms dislocation direction" }
+    ],
+    specialViews: [
+      { name: "Grashey View (True AP / Glenoid Profile)", positioning: "Patient rotated 35–45° posterior oblique so the glenoid is in profile", purpose: "Joint space assessment free of superimposition — used to confirm true glenohumeral congruency" },
+      { name: "Velpeau Axillary", positioning: "Patient leans backward over the IR with arm in a sling, no arm abduction needed", purpose: "Axillary-equivalent view for patients who cannot abduct the arm (acute injury)" }
+    ],
+    anatomy: { normal: "Glenohumeral joint: humeral head articulates with the shallow glenoid fossa of the scapula, stabilized by the labrum and rotator cuff. Acromion and coracoid process project from the scapula.", crossSectional: "Axial MRI/CT shows the glenoid labrum and glenohumeral relationship — key for detecting Hill-Sachs and Bankart lesions after dislocation." },
+    fractures: [
+      { name: "Anterior Shoulder Dislocation with Hill-Sachs Lesion", location: "Posterolateral humeral head impaction", mechanism: "Anterior dislocation impacting the humeral head against the anteroinferior glenoid rim", findings: "Compression fracture/divot on the posterolateral humeral head, best seen on internal rotation AP or axillary view", note: "Occurs in the large majority of anterior dislocations, especially recurrent ones." },
+      { name: "Bankart Lesion", location: "Anteroinferior glenoid rim", mechanism: "Same anterior dislocation event as Hill-Sachs — the counterpart injury on the glenoid side", findings: "Bony fragment or labral disruption at the anteroinferior glenoid; often needs MRI/MR arthrogram if plain film is normal", note: "Bony Bankart (visible fragment) vs soft-tissue Bankart (labrum only, MRI needed)." },
+      { name: "Greater Tuberosity Fracture", location: "Greater tuberosity of the proximal humerus", mechanism: "Direct blow or associated with anterior shoulder dislocation", findings: "Avulsed fragment, best seen on external rotation AP", note: "Commonly accompanies anterior dislocation — check for it whenever a dislocation is reduced." }
+    ]
+  },
+  {
+    id: "clavicle", name: "Clavicle", region: "Upper Limb",
+    routineViews: [
+      { name: "AP Clavicle", positioning: "Patient upright or supine, arms at sides, CR perpendicular to mid-clavicle", purpose: "Full clavicle length, sternoclavicular and acromioclavicular joints" },
+      { name: "AP Axial Clavicle (15–30° cephalad)", positioning: "Same positioning as AP, CR angled cephalad 15–30°", purpose: "Projects the clavicle above the ribs/scapula for a clearer, less foreshortened view" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "S-shaped long bone connecting the sternum (sternoclavicular joint) to the scapula's acromion (acromioclavicular joint); subclavian vessels and brachial plexus pass just beneath it.", crossSectional: "Axial CT is used to evaluate the sternoclavicular joint specifically, since plain film assessment there is limited by overlap." },
+    fractures: [
+      { name: "Mid-Shaft Clavicle Fracture", location: "Middle third of the clavicle", mechanism: "Fall onto the shoulder or outstretched hand", findings: "Fracture line in the mid-shaft, often with superior displacement of the medial fragment from sternocleidomastoid pull", note: "Most common clavicle fracture site (~80%); graded by the Allman classification (group I: middle third)." },
+      { name: "Distal Clavicle Fracture", location: "Lateral/distal third of the clavicle", mechanism: "Direct fall onto the shoulder", findings: "Fracture near the AC joint, may be associated with coracoclavicular ligament injury", note: "Associated AC joint instability changes management compared to mid-shaft fractures." }
+    ]
+  },
+  {
+    id: "scapula", name: "Scapula", region: "Upper Limb",
+    routineViews: [
+      { name: "AP Scapula", positioning: "Arm slightly abducted, CR perpendicular to mid-scapula", purpose: "Body, spine, and borders of the scapula" },
+      { name: "Lateral Scapula (Y View)", positioning: "Patient angled ~60° anterior oblique, scapular body in profile", purpose: "Confirms fracture displacement and relationship to the glenohumeral joint" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "Flat triangular bone with body, spine, acromion, coracoid process, and glenoid fossa; well cushioned by surrounding musculature, which is why fractures here usually indicate high-energy trauma.", crossSectional: "Axial CT is preferred for glenoid and acromion fracture assessment given the complex 3D shape." },
+    fractures: [
+      { name: "Scapular Body Fracture", location: "Scapular body/blade", mechanism: "High-energy direct trauma (e.g. motor vehicle collision)", findings: "Fracture line through the flat body of the scapula", note: "Considered a marker of significant associated injury (chest, spine) due to the force required to fracture a well-protected bone." },
+      { name: "Glenoid Fracture", location: "Glenoid fossa (articular surface)", mechanism: "Direct impact or associated with shoulder dislocation", findings: "Intra-articular fracture line, best assessed with CT", note: "Intra-articular involvement changes management toward operative fixation." }
+    ]
+  },
+  {
+    id: "foot", name: "Foot", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Foot (Dorsoplantar)", positioning: "Patient seated/supine, knee flexed, sole flat on IR. CR angled 10° posteriorly, centered to base of 3rd metatarsal.", purpose: "Demonstrates metatarsals, phalanges, tarsals (foreshortened); shows Lisfranc alignment" },
+      { name: "AP Oblique Foot (Medial rotation 30–40°)", positioning: "Foot rotated internally 30–40° from AP, CR perpendicular to 3rd MT base", purpose: "Opens sinus tarsi, cuboid, intertarsal joints; shows base of 5th metatarsal clearly" },
+      { name: "Lateral Foot (Mediolateral)", positioning: "Patient on affected side, foot true lateral, CR perpendicular to base of 3rd MT", purpose: "Superimposed metatarsals; shows longitudinal arch, calcaneus, talus, sinus tarsi" }
+    ],
+    specialViews: [
+      { name: "Weight-Bearing AP/Lateral Foot", positioning: "Patient standing on IR/detector, both feet or affected foot", purpose: "Evaluates arch integrity, midfoot alignment (Lisfranc), pes planus" },
+      { name: "Broden's View", positioning: "Foot in AP with medial/lateral rotation 40–45°, ankle dorsiflexed, CR angled cephalad 10–40° in 10° increments", purpose: "Subtalar joint, used for calcaneal fracture evaluation" }
+    ],
+    anatomy: { normal: "26 bones: 7 tarsals (calcaneus, talus, navicular, cuboid, 3 cuneiforms), 5 metatarsals, 14 phalanges. Key landmarks: sinus tarsi, sustentaculum tali, tuberosity of 5th metatarsal.", crossSectional: "Axial CT/MRI through hindfoot shows talus–calcaneus relationship and subtalar joint facets; coronal plane best demonstrates calcaneal body fractures and Böhler's angle assessment." },
+    fractures: [
+      { name: "Jones Fracture", location: "Base of 5th metatarsal, metaphyseal–diaphyseal junction", mechanism: "Adduction/inversion stress", findings: "Transverse fracture line 1.5–3 cm distal to tuberosity; prone to nonunion", note: "Distinguish from avulsion fracture of the tuberosity (pseudo-Jones), which has a better prognosis." },
+      { name: "Calcaneal Fracture", location: "Calcaneus, often involving posterior facet", mechanism: "Axial loading — fall from height", findings: "Decreased Böhler's angle (<20°) on lateral view; CT for articular involvement" },
+      { name: "Lisfranc Fracture-Dislocation", location: "Tarsometatarsal joint complex", mechanism: "Axial load on plantarflexed foot / crush injury", findings: "Widening between 1st/2nd MT bases, 'fleck sign'; weight-bearing views increase sensitivity" }
+    ]
+  },
+  {
+    id: "ankle", name: "Ankle", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Ankle", positioning: "Leg extended, foot dorsiflexed, CR perpendicular to midpoint between malleoli", purpose: "Distal tibia/fibula, talar dome, medial joint space" },
+      { name: "Mortise View (15–20° internal rotation)", positioning: "Leg/foot rotated internally 15–20° from AP so both malleoli are parallel to IR", purpose: "Opens the ankle mortise joint space evenly on all three sides — best view for mortise congruency" },
+      { name: "Lateral Ankle", positioning: "Patient on affected side, ankle true lateral, CR perpendicular to medial malleolus", purpose: "Anterior/posterior displacement, tibiotalar alignment, posterior malleolus" }
+    ],
+    specialViews: [
+      { name: "Stress Views (inversion/eversion)", positioning: "Manual or gravity stress applied while imaging the mortise", purpose: "Evaluates ligamentous instability when fracture has been excluded" }
+    ],
+    anatomy: { normal: "Mortise joint formed by the distal tibia (medial malleolus + plafond), distal fibula (lateral malleolus), and talar dome; held together by the syndesmosis and collateral ligaments.", crossSectional: "Axial CT shows the syndesmosis and mortise congruity — important in trimalleolar fractures and to detect a Maisonneuve injury (proximal fibula fracture with distal syndesmotic disruption)." },
+    fractures: [
+      { name: "Pott's Fracture (Bimalleolar/Trimalleolar)", location: "Medial and lateral malleoli (bimalleolar) or medial, lateral, and posterior malleolus (trimalleolar)", mechanism: "Forced eversion/external rotation of the ankle", findings: "Fracture lines through two or three malleoli with mortise widening", note: "The more malleoli involved, the more unstable the injury." },
+      { name: "Weber Classification (A/B/C)", location: "Distal fibula relative to the syndesmosis", mechanism: "Varies by rotational force direction", findings: "Weber A: below syndesmosis. Weber B: at the level of the syndesmosis. Weber C: above the syndesmosis (least stable)", note: "Higher fibular fracture level generally means greater syndesmotic instability." },
+      { name: "Maisonneuve Fracture", location: "Proximal fibula fracture with distal syndesmotic/interosseous membrane disruption", mechanism: "Severe external rotation force transmitted up the interosseous membrane", findings: "Proximal fibula fracture on a knee film — easily missed if only the ankle is imaged after a 'sprain'", note: "Always palpate/consider imaging the proximal fibula when ankle films show mortise widening without an obvious fibular fracture at the ankle." }
+    ]
+  },
+  {
+    id: "tibfib", name: "Tibia-Fibula", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Tibia-Fibula", positioning: "Leg extended, includes knee and ankle joints, CR perpendicular to mid-shaft", purpose: "Full-length alignment, both joints for reference" },
+      { name: "Lateral Tibia-Fibula", positioning: "Leg true lateral, includes both joints", purpose: "Anterior/posterior displacement and angulation" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "Tibia is the medial, weight-bearing bone with a prominent anterior crest; fibula is the thinner, lateral, largely non-weight-bearing bone providing lateral ankle stability.", crossSectional: "Axial CT is used for comminution mapping and rotational alignment assessment in shaft fractures, particularly before intramedullary nailing." },
+    fractures: [
+      { name: "Tibial Shaft Fracture", location: "Tibial diaphysis", mechanism: "Direct trauma (bumper injury) or torsional force (skiing/sports)", findings: "Transverse, oblique, or spiral fracture depending on mechanism; open fracture risk is higher here due to the thin overlying soft tissue", note: "Most common long bone fracture; high risk of compartment syndrome — a clinical diagnosis to watch for regardless of imaging findings." },
+      { name: "Fibular Shaft Fracture", location: "Fibular diaphysis, isolated or with tibial fracture", mechanism: "Direct blow or associated with ankle injury (see Maisonneuve)", findings: "Fracture line in the fibular shaft; if isolated and low-energy, usually less clinically significant than a tibial fracture", note: "An isolated proximal fibular fracture should prompt a check for an associated ankle/syndesmotic injury." },
+      { name: "Toddler's Fracture", location: "Distal tibial shaft, nondisplaced spiral pattern", mechanism: "Low-energy twisting injury in a young ambulating child", findings: "Subtle, often nondisplaced spiral lucency — can be very difficult to see on the initial film", note: "Classic in a limping toddler with no clear trauma history; may need follow-up films or bone scan if the first X-ray is negative but suspicion remains." }
+    ]
+  },
+  {
+    id: "knee", name: "Knee", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Knee", positioning: "Leg extended, patella centered, CR perpendicular ~0.5 inch below patellar apex", purpose: "Femoral condyles, tibial plateau, joint space" },
+      { name: "Lateral Knee", positioning: "Knee flexed 20–30°, true lateral, CR perpendicular to the joint space", purpose: "Patella profile, joint effusion (suprapatellar), fat pad assessment" },
+      { name: "Oblique Knee (medial/lateral)", positioning: "Leg rotated 45° from AP", purpose: "Profiles the tibial plateau margins and fibular head" }
+    ],
+    specialViews: [
+      { name: "Tunnel/Notch View (Camp Coventry or Holmblad)", positioning: "Knee flexed 40–70°, CR angled to project through the intercondylar notch", purpose: "Intercondylar notch, tibial spines, loose bodies" },
+      { name: "Sunrise/Merchant View (Patellofemoral)", positioning: "Knee flexed ~90-110°, CR angled tangential to the patellofemoral joint", purpose: "Patellar alignment/subluxation and patellofemoral joint space" },
+      { name: "Weight-Bearing AP Knee", positioning: "Patient standing, both knees included", purpose: "Joint space narrowing assessment (osteoarthritis) under physiologic load" }
+    ],
+    anatomy: { normal: "Femoral condyles articulate with the tibial plateau; patella sits in the femoral trochlear groove. Menisci and cruciate/collateral ligaments (not visible on plain film) stabilize the joint.", crossSectional: "Axial/coronal CT is used for tibial plateau fracture mapping (Schatzker classification); MRI is the standard for ligament and meniscal injury, which plain film cannot show directly." },
+    fractures: [
+      { name: "Tibial Plateau Fracture", location: "Proximal tibia, articular surface", mechanism: "Axial loading with valgus/varus force (e.g. car bumper vs pedestrian, fall)", findings: "Depression or split fracture of the plateau, often lateral; CT used for surgical planning", note: "Classified by the Schatzker system (types I-VI), guiding operative approach." },
+      { name: "Segond Fracture", location: "Lateral tibial condyle, small avulsion just below the joint line", mechanism: "Internal rotation with varus stress", findings: "Small curvilinear bony fragment avulsed from the lateral tibia", note: "Strongly associated with an ACL tear — its presence should prompt MRI even if the ACL itself isn't visible on plain film." },
+      { name: "Patellar Fracture", location: "Patella", mechanism: "Direct blow (dashboard injury) or forceful quadriceps contraction", findings: "Transverse, vertical, or comminuted (stellate) fracture line; check quadriceps/patellar tendon continuity clinically", note: "A transverse fracture with wide displacement suggests the extensor mechanism has been disrupted." }
+    ]
+  },
+  {
+    id: "patella", name: "Patella", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Knee (includes patella)", positioning: "As per AP Knee positioning", purpose: "Patella is seen through the femur (less ideal profile), mainly used with lateral for initial assessment" },
+      { name: "Lateral Knee", positioning: "Knee flexed 20-30°, true lateral", purpose: "Patella in profile — best routine view for a patellar fracture line" }
+    ],
+    specialViews: [
+      { name: "Sunrise/Merchant (Axial Patella)", positioning: "Knee flexed ~90-110°, CR tangential through the patellofemoral joint", purpose: "Vertical fracture lines and patellar subluxation, often missed on AP/lateral alone" }
+    ],
+    anatomy: { normal: "Largest sesamoid bone in the body, embedded in the quadriceps tendon, articulating with the femoral trochlear groove; a normal variant called the bipartite patella (a separate ossification center, usually superolateral) is commonly mistaken for a fracture.", crossSectional: "The Sunrise/axial view is itself a cross-sectional-style projection; CT is reserved for comminuted or intra-articular fracture surgical planning." },
+    fractures: [
+      { name: "Transverse Patellar Fracture", location: "Mid-patella, transverse orientation", mechanism: "Sudden forceful quadriceps contraction (e.g. stumbling forward)", findings: "Horizontal lucent fracture line, may show fragment separation if the retinaculum is torn", note: "Most common patellar fracture pattern." },
+      { name: "Comminuted/Stellate Patellar Fracture", location: "Patella, multiple fragments", mechanism: "Direct high-energy blow (e.g. dashboard injury in a collision)", findings: "Multiple fracture lines radiating from a central point", note: "Direct-blow fractures tend to be comminuted rather than transverse." },
+      { name: "Bipartite Patella (normal variant, not a fracture)", location: "Superolateral patella, most commonly", mechanism: "Developmental — persistent separate ossification center", findings: "Smooth, well-corticated separate fragment, usually bilateral if you check the other knee", note: "Key teaching point: smooth cortical margins and superolateral location distinguish it from an acute fracture, which has sharp, non-corticated edges." }
+    ]
+  },
+  {
+    id: "femur", name: "Femur", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Femur", positioning: "Leg extended, includes hip or knee joint depending on region of interest, CR perpendicular to mid-shaft", purpose: "Full shaft alignment and one adjacent joint for reference" },
+      { name: "Lateral Femur", positioning: "Patient on affected side or leg raised (cross-table for trauma), includes hip or knee joint", purpose: "Anterior/posterior displacement and angulation" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "Longest bone in the body. Proximally: femoral head, neck, greater and lesser trochanters. Shaft has the linea aspera posteriorly for muscle attachment. Distally: medial and lateral condyles.", crossSectional: "Axial CT is used for shaft comminution mapping and to assess rotational alignment, particularly before intramedullary nail fixation." },
+    fractures: [
+      { name: "Femoral Shaft Fracture", location: "Femoral diaphysis", mechanism: "High-energy trauma (motor vehicle collision, fall from height)", findings: "Transverse, oblique, spiral, or comminuted fracture depending on force", note: "Significant blood loss risk (up to 1-1.5 L into the thigh) — a clinically important consideration even though it's not visible on the image itself." },
+      { name: "Distal Femur (Supracondylar) Fracture", location: "Distal femoral metaphysis, just above the condyles", mechanism: "Axial loading with a flexion/rotation component (fall, direct blow to a flexed knee)", findings: "Fracture line proximal to the condyles, may extend intra-articularly", note: "Bimodal age distribution — young patients from high-energy trauma, older patients from low-energy falls with osteoporotic bone." }
+    ]
+  },
+  {
+    id: "hip-pelvis", name: "Hip / Pelvis", region: "Lower Limb",
+    routineViews: [
+      { name: "AP Pelvis", positioning: "Supine, legs internally rotated 15-20° (if not contraindicated by suspected fracture), CR at the midpoint between ASIS and pubic symphysis", purpose: "Both hips, sacroiliac joints, and pelvic ring in one image" },
+      { name: "AP Hip", positioning: "Supine, affected leg internally rotated 15-20°, CR to the femoral neck (midway between ASIS and pubic symphysis, at the level of the greater trochanter)", purpose: "Femoral neck profile, free of foreshortening" },
+      { name: "Lateral Hip (Frog-Leg or Cross-Table/Danelius-Miller)", positioning: "Frog-leg: hip flexed and abducted (only if fracture not suspected). Cross-table: horizontal beam for trauma patients who can't move the leg", purpose: "Second-plane confirmation of femoral neck fracture and displacement" }
+    ],
+    specialViews: [
+      { name: "Judet Views (45° obliques)", positioning: "Patient rotated 45° anterior/posterior oblique, both sides", purpose: "Acetabular fracture column assessment (anterior/posterior column, rim)" }
+    ],
+    anatomy: { normal: "Acetabulum (formed by ilium, ischium, and pubis) articulates with the femoral head at the hip joint. Femoral neck connects the head to the shaft at the greater/lesser trochanters.", crossSectional: "Axial CT is the standard for acetabular fracture classification (Judet-Letournel system) and is also used to detect occult femoral neck fractures not visible on plain film." },
+    fractures: [
+      { name: "Femoral Neck Fracture", location: "Femoral neck, intracapsular", mechanism: "Fall in an elderly osteoporotic patient, or high-energy trauma in younger patients", findings: "Fracture line through the neck; graded by the Garden classification (I: incomplete/valgus impacted, through IV: complete, fully displaced)", note: "Intracapsular location puts the blood supply to the femoral head at risk — higher Garden grades carry higher avascular necrosis risk." },
+      { name: "Intertrochanteric Fracture", location: "Between the greater and lesser trochanters, extracapsular", mechanism: "Fall in an elderly patient (similar demographic to femoral neck fractures)", findings: "Fracture line crossing between the trochanters, often comminuted", note: "Extracapsular location means better blood supply than femoral neck fractures — lower AVN risk, but still a major surgical fracture." },
+      { name: "Acetabular Fracture", location: "Acetabulum — anterior column, posterior column, or both", mechanism: "High-energy trauma, often a lateral force through the femur (dashboard-type injury)", findings: "Best characterized with CT; Judet-Letournel classification describes ten fracture patterns based on column involvement", note: "Plain film Judet views are a starting point, but CT is essentially always obtained for surgical planning." }
+    ]
+  },
+  {
+    id: "cervical", name: "Cervical Spine", region: "Spine",
+    routineViews: [
+      { name: "AP Cervical Spine", positioning: "Upright or supine, chin slightly elevated, CR angled 15-20° cephalad to C4", purpose: "C3-C7 vertebral bodies and spinous processes" },
+      { name: "Lateral Cervical Spine (must include C7-T1)", positioning: "Upright if possible, shoulders depressed, CR to C4", purpose: "Alignment, prevertebral soft tissue, all 7 cervical bodies down to C7-T1 junction" },
+      { name: "Odontoid (Open-Mouth AP)", positioning: "Mouth open, CR perpendicular through the open mouth to the odontoid process", purpose: "Dens (odontoid process) and C1-C2 lateral masses" }
+    ],
+    specialViews: [
+      { name: "Swimmer's View", positioning: "One arm raised overhead, CR horizontal through the C7-T1 junction", purpose: "Visualizes C7-T1 when shoulders obscure it on the routine lateral" },
+      { name: "Flexion/Extension Views", positioning: "Lateral projections with active flexion and extension (only after fracture is clinically/radiographically excluded)", purpose: "Ligamentous instability assessment" }
+    ],
+    anatomy: { normal: "7 vertebrae. C1 (atlas) has no body, articulates with the occipital condyles. C2 (axis) has the odontoid process (dens) projecting up into the C1 ring — the atlanto-axial joint allows head rotation.", crossSectional: "Axial CT is now the standard first-line imaging for trauma cervical spine clearance, showing vertebral bodies, facet joints, and spinal canal in a way plain film cannot." },
+    fractures: [
+      { name: "Jefferson Fracture", location: "C1 (atlas), typically bilateral anterior and posterior arch fractures", mechanism: "Axial loading (e.g. diving into shallow water, falling object onto the head)", findings: "Lateral mass displacement beyond the margins of C2 on the open-mouth view", note: "A burst-type fracture of the ring of C1 — classically caused by pure axial compression." },
+      { name: "Hangman's Fracture", location: "C2 pars interarticularis, bilateral", mechanism: "Hyperextension with axial loading (classically judicial hanging, more commonly now a motor vehicle collision)", findings: "Fracture through the pars interarticularis of C2, best seen on lateral view", note: "Named for the classic hanging mechanism, though today it's most often seen after high-speed deceleration injuries." },
+      { name: "Clay-Shoveler's Fracture", location: "Spinous process, classically C6-C7 or C7-T1", mechanism: "Sudden forceful flexion against resistance, or direct blow, classically from shoveling clay", findings: "Avulsion fracture of the spinous process tip", note: "A stable fracture — doesn't involve the vertebral body or canal." },
+      { name: "Odontoid Fracture (Anderson-D'Alonzo)", location: "Dens (odontoid process) of C2", mechanism: "Hyperflexion or hyperextension with an axial component", findings: "Type I: tip avulsion (stable). Type II: base of the dens (most common, high nonunion risk). Type III: extends into the C2 body (best healing potential)", note: "Type II is the classification level most often requiring surgical stabilization due to poor blood supply at the base of the dens." }
+    ]
+  },
+  {
+    id: "thoracic", name: "Thoracic Spine", region: "Spine",
+    routineViews: [
+      { name: "AP Thoracic Spine", positioning: "Supine or upright, CR to T7 (midway between the sternal notch and xiphoid)", purpose: "Vertebral body height and alignment, pedicles" },
+      { name: "Lateral Thoracic Spine", positioning: "Patient on side or upright lateral, CR to T7", purpose: "Vertebral body height (compression fracture assessment), disc spaces, kyphosis" }
+    ],
+    specialViews: [
+      { name: "Swimmer's View", positioning: "One arm raised overhead", purpose: "Better visualizes the C7-T1/upper thoracic junction when shoulders obscure it" }
+    ],
+    anatomy: { normal: "12 vertebrae, each articulating with a pair of ribs; less mobile than the cervical or lumbar spine due to the rib cage, which also affords it some protection from injury.", crossSectional: "Axial CT is used to assess canal compromise from retropulsed fragments in burst fractures, and to evaluate paraspinal soft tissue involvement." },
+    fractures: [
+      { name: "Compression Fracture", location: "Anterior vertebral body, causing wedge deformity", mechanism: "Osteoporotic insufficiency fracture (minimal trauma) or flexion-type trauma", findings: "Loss of anterior vertebral body height relative to the posterior height, seen on lateral view", note: "Very common in osteoporotic patients — often an incidental finding on a chest film taken for another reason." },
+      { name: "Burst Fracture", location: "Vertebral body, involving both anterior and posterior elements", mechanism: "High-energy axial loading (fall from height, high-speed collision)", findings: "Loss of both anterior and posterior vertebral body height, with possible retropulsion of fragments into the canal — CT needed to assess canal compromise", note: "Unlike a simple compression fracture, involvement of the posterior body makes this potentially unstable and neurologically threatening." }
+    ]
+  },
+  {
+    id: "lumbar", name: "Lumbar Spine", region: "Spine",
+    routineViews: [
+      { name: "AP Lumbar Spine", positioning: "Supine, CR to L3 (at the level of the iliac crest)", purpose: "Vertebral body alignment, pedicles, transverse processes" },
+      { name: "Lateral Lumbar Spine", positioning: "Patient on side, CR to L3", purpose: "Vertebral body height, disc spaces, lordotic curvature" },
+      { name: "Oblique Lumbar Spine (pars interarticularis)", positioning: "Patient rotated 45° from AP", purpose: "Pars interarticularis in profile — the 'Scotty dog' appearance used to detect spondylolysis" }
+    ],
+    specialViews: [
+      { name: "Spot Lateral L5-S1", positioning: "Tightly collimated lateral centered on the L5-S1 disc space", purpose: "This level is often obscured by iliac crest overlap on the routine lateral" }
+    ],
+    anatomy: { normal: "5 vertebrae with the largest, most robust bodies in the spine (to bear the greatest load). The pars interarticularis is the bony segment between the superior and inferior articular facets, a common site of stress fracture.", crossSectional: "Axial CT shows the pars interarticularis clearly and is used for spondylolysis; disc herniation itself is better evaluated with MRI, which shows soft tissue that CT and plain film cannot." },
+    fractures: [
+      { name: "Chance Fracture (Flexion-Distraction)", location: "Vertebral body and posterior elements, horizontal fracture line through all three columns", mechanism: "Classic seatbelt injury — sudden forward flexion around a lap belt in a motor vehicle collision", findings: "Horizontal fracture line extending from posterior elements through the vertebral body", note: "Strongly associated with intra-abdominal injury given the shared mechanism — don't stop at the spine finding." },
+      { name: "Pars Defect / Spondylolysis", location: "Pars interarticularis, most common at L5", mechanism: "Repetitive stress/microtrauma (common in gymnasts, weightlifters, fast bowlers in cricket)", findings: "Lucent line through the pars on the oblique view — described as a 'collar' on the Scotty dog's neck", note: "Bilateral pars defects can progress to spondylolisthesis (forward slippage of the vertebral body)." },
+      { name: "Compression Fracture", location: "Anterior vertebral body", mechanism: "Osteoporotic insufficiency or flexion trauma", findings: "Anterior height loss relative to posterior height on lateral view", note: "Same pattern and significance as in the thoracic spine." }
+    ]
+  },
+  {
+    id: "sacrum-coccyx", name: "Sacrum & Coccyx", region: "Spine",
+    routineViews: [
+      { name: "AP Axial Sacrum", positioning: "Supine, CR angled 15° cephalad, centered midline ~2 inches above pubic symphysis", purpose: "Sacral segments and sacroiliac joints without foreshortening" },
+      { name: "Lateral Sacrum/Coccyx", positioning: "Patient on side, CR perpendicular to the sacrum/coccyx", purpose: "Curvature and alignment, anterior/posterior angulation of the coccyx" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "5 fused sacral vertebrae forming a triangular bone that articulates with the ilium at the sacroiliac joints; the coccyx (3-5 small fused segments) attaches at the sacrococcygeal joint.", crossSectional: "Axial CT is often needed for sacral fractures, since the complex curved 3D shape and overlying bowel gas make these frequently occult on plain film." },
+    fractures: [
+      { name: "Sacral Insufficiency Fracture", location: "Sacral ala, often bilateral", mechanism: "Osteoporotic insufficiency fracture from normal activity (minimal or no trauma)", findings: "Often subtle or invisible on plain film; classic 'Honda sign' (H-shaped uptake) on bone scan, or vertical lucency on CT", note: "A common cause of unexplained lower back/pelvic pain in older adults that is easy to miss without a high index of suspicion." },
+      { name: "Coccygeal Fracture", location: "Coccyx", mechanism: "Direct fall onto the tailbone in a seated position", findings: "Angulation or discontinuity of the coccygeal segments on the lateral view", note: "Clinical diagnosis often outpaces imaging sensitivity here — a normal film doesn't exclude a clinically significant injury." }
+    ]
+  },
+  {
+    id: "skull", name: "Skull", region: "Axial",
+    routineViews: [
+      { name: "PA/Caldwell View", positioning: "Forehead and nose on IR, CR angled 15° caudad", purpose: "Frontal bone, orbital rims, frontal sinuses" },
+      { name: "Lateral Skull", positioning: "Side of head against IR, true lateral", purpose: "Cranial vault, sella turcica, sinuses in profile" },
+      { name: "Towne's View", positioning: "Supine, chin tucked, CR angled 30° caudad through the foramen magnum", purpose: "Occipital bone and foramen magnum" }
+    ],
+    specialViews: [],
+    anatomy: { normal: "Cranial vault formed by the frontal, paired parietal, paired temporal, and occipital bones, joined by sutures (coronal, sagittal, lambdoid).", crossSectional: "Axial CT is now the primary trauma imaging modality for the skull and brain, having largely replaced plain skull radiography in acute settings." },
+    fractures: [
+      { name: "Linear Skull Fracture", location: "Anywhere in the cranial vault", mechanism: "Direct impact without significant depression", findings: "Sharp, non-branching lucent line, sometimes hard to distinguish from a suture on plain film — CT is more definitive", note: "Most common skull fracture pattern; significance depends more on associated brain injury than the fracture itself." },
+      { name: "Depressed Skull Fracture", location: "Localized area of the vault", mechanism: "High-energy focal impact (e.g. blunt object)", findings: "Inward displacement of a bone fragment below the inner table of the adjacent skull", note: "Open/depressed fractures carry infection risk and often need surgical elevation depending on the depth of depression." },
+      { name: "Basilar Skull Fracture", location: "Skull base", mechanism: "High-energy trauma, often with a fracture line extending from the vault", findings: "Often not directly visible — diagnosed from indirect signs: periorbital ecchymosis ('raccoon eyes'), mastoid ecchymosis (Battle's sign), CSF rhinorrhea/otorrhea, hemotympanum", note: "A clinical/indirect-sign diagnosis as much as an imaging one — CT with bone windows is the modality of choice when suspected." }
+    ]
+  },
+  {
+    id: "facial", name: "Facial Bones", region: "Axial",
+    routineViews: [
+      { name: "Waters' View (Occipitomental)", positioning: "Chin extended against IR, forehead off the IR, CR horizontal", purpose: "Orbital floors, maxillary sinuses, zygomatic arches — the primary facial trauma screening view" },
+      { name: "Caldwell View (PA, 15° caudad)", positioning: "Forehead and nose against IR, CR angled 15° caudad", purpose: "Orbital rims and frontal sinuses" }
+    ],
+    specialViews: [
+      { name: "Submentovertex (SMV)", positioning: "Neck hyperextended, top of head against IR, CR perpendicular to the infraorbitomeatal line", purpose: "Zygomatic arches in profile — largely replaced by CT in current practice" }
+    ],
+    anatomy: { normal: "Maxilla, zygoma, nasal bones, and orbits make up the midface; the mandible articulates with the temporal bone at the temporomandibular joint (TMJ).", crossSectional: "Axial and coronal CT is the gold standard for facial trauma — plain films are now mainly a rapid initial screen, with CT used for anything beyond a simple, isolated nasal fracture." },
+    fractures: [
+      { name: "Le Fort Fracture (I/II/III)", location: "Maxilla, classified by fracture plane level", mechanism: "High-energy midface trauma", findings: "Le Fort I: horizontal, above the teeth apices. Le Fort II: pyramidal, through the nasal bridge and maxilla. Le Fort III: craniofacial separation, through the zygomatic arches and orbits", note: "The three types can co-exist on the same or opposite sides — assess each side independently." },
+      { name: "Zygomaticomaxillary Complex (Tripod) Fracture", location: "Zygomatic arch, orbital floor/rim, and zygomaticomaxillary buttress", mechanism: "Direct blow to the cheek", findings: "Fracture at all three named attachment points of the zygoma", note: "Despite the name implying three points, it's really a fracture around the zygoma's four articulations — 'tripod' is the traditional, if imprecise, term." },
+      { name: "Orbital Blowout Fracture", location: "Orbital floor most commonly, sometimes medial wall", mechanism: "Direct blow to the globe transmitting force to the thin orbital floor (e.g. a ball or fist)", findings: "Depressed floor fragment with soft tissue/fat herniating into the maxillary sinus — the 'teardrop sign' on Waters' view", note: "Watch for an entrapped extraocular muscle, which is a surgical urgency regardless of the fracture size." }
+    ]
+  },
+  {
+    id: "chest-ribs", name: "Chest / Ribs", region: "Axial",
+    routineViews: [
+      { name: "PA Chest", positioning: "Upright, chest against IR, arms rotated forward to move scapulae off the lung fields, CR to T7", purpose: "Lung fields, mediastinum, ribs, heart silhouette" },
+      { name: "Lateral Chest", positioning: "Upright, arms raised, side against IR", purpose: "Confirms location of findings seen on PA, evaluates retrocardiac and retrosternal spaces" },
+      { name: "AP/Oblique Ribs", positioning: "Centered to the area of clinical concern, above or below the diaphragm depending on suspected level", purpose: "Dedicated rib detail beyond what a routine chest film shows" }
+    ],
+    specialViews: [
+      { name: "Expiration Film", positioning: "Same as PA chest, exposed at full expiration instead of inspiration", purpose: "Increases conspicuity of a small pneumothorax by reducing lung volume relative to the pleural air" }
+    ],
+    anatomy: { normal: "12 pairs of ribs articulate posteriorly with the thoracic vertebrae and (for ribs 1-10) anteriorly with the sternum via costal cartilage; ribs 11-12 are 'floating' with no anterior attachment.", crossSectional: "Axial CT is far more sensitive than plain film for occult rib fractures and for detecting associated pulmonary contusion, hemothorax, or vascular injury." },
+    fractures: [
+      { name: "Simple Rib Fracture", location: "Any rib, single or few, single fracture site each", mechanism: "Direct blow or fall", findings: "Cortical discontinuity, often subtle on plain film — many rib fractures are only confirmed on CT", note: "Management is largely clinical (pain control, incentive spirometry) rather than imaging-driven once the diagnosis is made." },
+      { name: "Flail Chest", location: "Three or more consecutive ribs, each fractured in two or more places", mechanism: "High-energy blunt chest trauma", findings: "A free-floating segment of chest wall visible as paradoxical movement clinically; multiple fracture sites per rib on imaging", note: "A clinical and mechanical diagnosis (paradoxical chest wall motion) as much as a radiographic one." },
+      { name: "Sternal Fracture", location: "Sternum, usually the body", mechanism: "Direct anterior chest trauma (classically a steering wheel injury)", findings: "Best seen on the lateral chest view or dedicated sternal obliques; associated with underlying cardiac contusion in higher-energy mechanisms", note: "Given the anatomic proximity, a sternal fracture should prompt consideration of cardiac injury, not just the bone itself." }
+    ]
+  }
+];
+
+const IMG_SOURCES = [
+  { label: "Radiopaedia", url: "https://radiopaedia.org/search?q=" },
+  { label: "Wikimedia Commons", url: "https://commons.wikimedia.org/w/index.php?search=" }
+];
+const ANATOMY_SOURCES = ["Kenhub", "Anatomy Learning", "TM Anatomy"];
+const CROSS_SECTIONAL_SOURCES = ["TC-Tomografia", "Radio Anatomy"];
+
+function googleLink(sourceName, query){
+  return `https://www.google.com/search?q=${encodeURIComponent(sourceName + ' ' + query)}`;
+}
+function anatomyLinksHTML(sourceNames, regionName, suffix){
+  const q = `${regionName} ${suffix}`;
+  return `<div class="img-refs">${sourceNames.map(s => `<a href="${googleLink(s, q)}" target="_blank" rel="noopener">${s} ↗</a>`).join('')}</div>`;
+}
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+
+const REGION_ORDER = ["Upper Limb", "Lower Limb", "Spine", "Axial"];
+
+function renderRegionPicker(){
+  const el = document.getElementById('pickerGroups');
+  el.innerHTML = REGION_ORDER.map(group => {
+    const members = DATA.filter(r => r.region === group);
+    if(!members.length) return '';
+    return `<div class="picker-group">
+      <div class="picker-group-label">${group}</div>
+      <div class="region-picker">
+        ${members.map(r => `<button class="region-chip" data-id="${r.id}" aria-pressed="false">${r.name}</button>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.region-chip').forEach(btn=>{
+    btn.addEventListener('click', ()=> { showRegion(btn.dataset.id); closePicker(); });
+  });
+}
+
+function closePicker(){
+  document.getElementById('pickerGroups').classList.remove('open');
+  document.getElementById('browseToggle').textContent = 'Browse all regions ↓';
+}
+document.getElementById('browseToggle').addEventListener('click', ()=>{
+  const el = document.getElementById('pickerGroups');
+  const open = el.classList.toggle('open');
+  document.getElementById('browseToggle').textContent = open ? 'Hide region list ↑' : 'Browse all regions ↓';
+});
+
+function fractureCardHTML(f, regionId, flash){
+  const searchTerm = encodeURIComponent(f.name.replace(/'/g,''));
+  return `
+    <div class="fracture-card${flash ? ' flash' : ''}" id="fx-${regionId}-${slug(f.name)}">
+      <p class="fname">${f.name}</p>
+      <div class="field"><b>Location:</b> ${f.location}</div>
+      <div class="field"><b>Mechanism:</b> ${f.mechanism}</div>
+      <div class="field"><b>Imaging findings:</b> ${f.findings}</div>
+      ${f.note ? `<p class="note">${f.note}</p>` : ''}
+      <div class="img-refs">
+        ${IMG_SOURCES.map(s => `<a href="${s.url}${searchTerm}" target="_blank" rel="noopener">${s.label} ↗</a>`).join('')}
+      </div>
+    </div>`;
+}
+
+function renderRegion(r, flashFracture){
+  const main = document.getElementById('region-view');
+  const specialBlock = r.specialViews.length ? `
+    <section class="block">
+      <h3>Special Views</h3>
+      ${r.specialViews.map(v => `
+        <div class="view-card">
+          <div class="name">${v.name}</div>
+          <div class="field"><b>Positioning:</b> ${v.positioning}</div>
+          <div class="field"><b>Purpose:</b> ${v.purpose}</div>
+        </div>`).join('')}
+    </section>` : '';
+
+  main.innerHTML = `
+    <div class="region-title">
+      <h2>${r.name}</h2>
+      <span class="region-tag">${r.region}</span>
+    </div>
+
+    <section class="block">
+      <h3>Routine Views</h3>
+      ${r.routineViews.map(v => `
+        <div class="view-card">
+          <div class="name">${v.name}</div>
+          <div class="field"><b>Positioning:</b> ${v.positioning}</div>
+          <div class="field"><b>Purpose:</b> ${v.purpose}</div>
+        </div>`).join('')}
+    </section>
+
+    ${specialBlock}
+
+    <section class="block">
+      <h3>Anatomy</h3>
+      <span class="anatomy-label">Normal anatomy</span>
+      <p class="anatomy-text">${r.anatomy.normal}</p>
+      ${anatomyLinksHTML(ANATOMY_SOURCES, r.name, 'anatomy diagram')}
+      <span class="anatomy-label" style="margin-top:16px;display:block;">Cross-sectional</span>
+      <p class="anatomy-text">${r.anatomy.crossSectional}</p>
+      ${anatomyLinksHTML(CROSS_SECTIONAL_SOURCES, r.name, 'cross sectional CT anatomy')}
+    </section>
+
+    <section class="block">
+      <h3>Common Fractures</h3>
+      ${r.fractures.map(f => fractureCardHTML(f, r.id, flashFracture === f.name)).join('')}
+    </section>
+  `;
+  main.classList.add('active');
+}
+
+function showRegion(id, flashFracture){
+  const r = DATA.find(x => x.id === id);
+  document.querySelectorAll('.region-chip').forEach(btn=>{
+    btn.setAttribute('aria-pressed', btn.dataset.id === id ? 'true' : 'false');
+  });
+  renderRegion(r, flashFracture);
+  document.getElementById('searchResults').innerHTML = '';
+  document.getElementById('searchInput').value = '';
+  if(flashFracture){
+    requestAnimationFrame(()=>{
+      const target = document.getElementById(`fx-${id}-${slug(flashFracture)}`);
+      if(target) target.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  } else {
+    document.getElementById('region-view').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+function buildFractureIndex(){
+  const idx = [];
+  DATA.forEach(r => r.fractures.forEach(f => idx.push({ fractureName: f.name, regionId: r.id, regionName: r.name })));
+  return idx;
+}
+const FRACTURE_INDEX = buildFractureIndex();
+
+function runSearch(q){
+  const results = document.getElementById('searchResults');
+  q = q.trim().toLowerCase();
+  if(!q){ results.innerHTML=''; return; }
+
+  const fxHits = FRACTURE_INDEX.filter(f => f.fractureName.toLowerCase().includes(q));
+  const regionHits = DATA.filter(r => r.name.toLowerCase().includes(q) && !fxHits.some(f=>f.regionId===r.id));
+
+  if(fxHits.length === 0 && regionHits.length === 0){
+    results.innerHTML = `<p class="empty-note">No match for "${q}" yet — try a fracture name (Colles, Jones) or region (Foot, Wrist).</p>`;
+    return;
+  }
+
+  let html = '';
+  fxHits.forEach(f=>{
+    html += `<button class="search-hit" data-region="${f.regionId}" data-fx="${f.fractureName}">
+      ${f.fractureName} <span class="hit-region">— ${f.regionName}</span>
+    </button>`;
+  });
+  regionHits.forEach(r=>{
+    html += `<button class="search-hit" data-region="${r.id}">
+      ${r.name} <span class="hit-region">— browse region</span>
+    </button>`;
+  });
+  results.innerHTML = html;
+  results.querySelectorAll('.search-hit').forEach(btn=>{
+    btn.addEventListener('click', ()=> showRegion(btn.dataset.region, btn.dataset.fx || null));
+  });
+}
+
+document.getElementById('searchInput').addEventListener('input', e => runSearch(e.target.value));
+
+renderRegionPicker();
+document.getElementById('pickerGroups').classList.add('open');
+document.getElementById('browseToggle').textContent = 'Hide region list ↑';
+showRegion('foot');
+</script>
+</body>
+</html>
